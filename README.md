@@ -1,64 +1,120 @@
 # 🎙️ Gerenciador de PodCasts
 
-## ℹ️ Descrição 
+---
 
-O Gerenciador de PodCasts é uma aplicação inspirada no estilo da Netflix, que permite centralizar diferentes episódios de podcasts separados por categoria. Este projeto visa facilitar o acesso e a organização de episódios de podcasts em formato de vídeo, proporcionando uma experiência de navegação intuitiva e agradável para os usuários.
+Uma API RESTful desenvolvida para o gerenciamento e catalogação de episódios de podcasts. Projeto realizado utilizando **TypeScript** e o módulo nativo **HTTP** do **Node.js**, como parte do desafio prático da **Formação Node.js Fundamentals**.
 
-## 🚀 Funcionalidades
+---
 
-- **Listar os episódios de podcasts em sessões de categorias:** Os episódios são organizados em categorias como saúde, bodybuilder, metodologia ágil, qa, programação e humor, permitindo aos usuários explorar facilmente os conteúdos disponíveis.
-- **Filtrar episódios por nome de podcast:** Os usuários podem realizar buscas específicas por nome de podcast, facilitando o acesso aos episódios desejados.
+## 🤝 Agradecimentos
 
-## ✅ Implementação
+Agradecimento especial ao professor **Felipe Aguiar** ([@felipeAguiarCode](https://github.com/felipeAguiarCode)) pela didática, condução dos conteúdos e mentoria ao longo da **Formação Node.js Fundamentals**. O aprendizado prático ministrado foi fundamental para a construção e evolução da estrutura deste projeto.
 
-### Mensagem de boas vindas
+---
 
-- **Endpoint:** `GET /`
-- **Descrição:** Retorna mensagem de boas vindas.
-- **Exemplo de resposta:**
+## 🎯 Sobre o Projeto
 
-```json
-{
-  "message": "Seja bem vindo(a) à API de Gerenciamento de PodCasts"
-}
+O objetivo principal desta aplicação é fornecer uma estrutura sólida de backend para listagem, filtragem e busca de episódios de podcasts organizados por categorias e apresentadores. 
+
+Partindo de uma abordagem inicial, o projeto passou por um processo completo de **refatoração e higienização de código (sanitization)** para atingir padrões de código limpo (*Clean Code*), removendo dependências desnecessárias de frameworks de alto nível como o Express e explorando os fundamentos da plataforma Node.js.
+
+### 🌟 Destaques da Arquitetura
+- **Zero Frameworks de Roteamento:** Construído 100% sobre o módulo nativo `http` do Node.js.
+- **Arquitetura em Camadas (Layered Architecture):** Separação clara de responsabilidades em `Controllers`, `Services`, `Repositories`, `Models` e `Routes`.
+- **I/O Não-Bloqueante:** Leitura assíncrona da camada de dados utilizando `fs/promises`.
+- **Tipagem Estática & Segurança:** Implementação completa com **TypeScript** para garantir inferência de tipos e prevenção de erros em tempo de compilação.
+- **Tratamento de Erros Estruturado:** Blocos `try/catch` centralizados nos controllers para captura e resposta padronizada de falhas HTTP (`500 Internal Server Error`).
+
+---
+💻 Como Executar no VS Code
+Abra o projeto no Visual Studio Code.
+
+Abra o terminal integrado navegando em Terminal > New Terminal (ou pelo atalho Ctrl + ').
+
+Certifique-se de estar na raiz do projeto e instale as dependências (caso ainda não tenha instalado):
+
+
+`npm install`
+Inicie o servidor em modo de observação (watch):
+
+
+`npm run start:watch`
+O terminal exibirá a mensagem de confirmação:🚀 Servidor rodando na porta http://localhost:3333
+
+🌐 Como Testar no Navegador
+Com o servidor rodando via terminal, abra qualquer navegador de sua preferência (ex: LibreWolf, Chrome, Firefox) e acesse as rotas disponíveis:
+
+Rota de Boas-Vindas - `URL: http://localhost:3333/`
+
+Retorno esperado: {"message": "Gerenciador de Podcasts - API NodeJS Com Typescript e HTTP Module"}
+
+Listar Todos os Episódios:
+URL: http://localhost:3333/api/list
+
+Retorno esperado: Array completo com todos os podcasts cadastrados.
+Filtrar Podcasts por Nome:
+
+URL: http://localhost:3333/api/podcasts?p=Fala Glauber
+Retorno esperado: Array contendo apenas os episódios correspondentes ao parâmetro de busca.
+
+📌 Endpoints da API
+1. Boas-Vindas (Health Check)
+Rota: GET /
+
+Descrição: Retorna o status de execução da API.
+
+2. Listar Todos os Episódios
+Rota: GET /api/list
+
+Descrição: Retorna a lista completa de podcasts cadastrados no repositório.
+
+3. Filtrar Podcasts por Nome
+Rota: GET /api/podcasts?p={nomeDoPodcast}
+
+Descrição: Retorna episódios filtrados pelo parâmetro p via Query String (insensível a maiúsculas/minúsculas).
+
+---
+
+## 🛠️ Tecnologias e Ferramentas
+
+| Tecnologia | Descrição |
+|---|---|
+|**VScode** | Editor de código usado.
+|**Git e Github** | Versionamento de código.
+| **Node.js** | Ambiente de execução JavaScript no lado do servidor |
+| **TypeScript** | Superset JavaScript que adiciona tipagem estática ao código |
+| **HTTP Module (Nativo)** | Criação do servidor e gerenciamento de rotas/requisições |
+| **FS / Promises** | Manipulação assíncrona do sistema de arquivos para o repositório JSON |
+| **TSX** | Executor TypeScript de alta performance para ambiente de desenvolvimento |
+| **Dotenv** | Gerenciamento de variáveis de ambiente (`.env`) |
+
+---
+
+## 📁 Estrutura de Pastas
+
+```text
+desafio-dio-api-de-podcast/
+├── src/
+│   ├── controllers/      # Gerenciamento de requisições e respostas HTTP
+│   │   └── podcasts-controller.ts
+│   ├── services/         # Regras de negócio e intermediação de dados
+│   │   ├── list-episodes-service.ts
+│   │   └── list-podcasts-service.ts
+│   ├── repositories/     # Camada de persistência (JSON) e leitura assíncrona
+│   │   ├── podcast-repository.ts
+│   │   └── podcasts.json
+│   ├── models/           # Interfaces e definições de dados do TypeScript
+│   │   └── podcast-model.ts
+│   ├── routes/           # Mapeamento de rotas e verbos HTTP (Enums)
+│   │   └── routes.ts
+│   ├── app.ts            # Roteador central e interceptador de requisições
+│   └── server.ts         # Ponto de entrada (Entry point) e inicialização do servidor
+├── .env                  # Configurações de ambiente (Porta)
+├── .gitignore            # Filtro de arquivos para o Git
+├── package.json          # Dependências e scripts do projeto
+├── tsconfig.json         # Configurações do compilador TypeScript
+└── README.md             # Documentação do repositório
 ```
-
-### Listar os episódios de podcasts em sessões de categorias
-
-- **Endpoint:** `GET /api/list`
-- **Descrição:** Retorna uma lista de episódios de podcasts organizados por categorias.
-- **Exemplo de resposta:**
-
-```json
-[
-    {
-      "podcastName": "flow",
-      "episode": "SCRUM MASTER - Flow #320",
-      "videoId": "4KDGTdiOV4I",
-      "categories": ["metodologia ágil", "programação"]
-    },
-    {
-      "podcastName": "flow",
-      "episode": "QUALIDADE DE SOFTWARE - flow #321",
-      "videoId": "4KDGTdiOA4I",
-      "categories": ["qa", "programação"]
-    },
-]
-```
-
-### Filtrar episódios por nome de podcast
-
-- **Endpoint:** `GET /api/podcasts?p={nome}`
-- **Descrição:** Retorna uma lista de episódios de podcast com base no nome do podcast fornecido.
-- **Exemplo de requisição:** `GET /api/podcasts?p=flow`
-
-## 💻 Tecnologias Utilizadas
-
-- **[TypeScript](https://www.typescriptlang.org/):** Linguagem de programação utilizada para o desenvolvimento do projeto.
-- **[Tsup](https://github.com/egoist/tsup):** Ferramenta de construção e empacotamento para projetos TypeScript.
-- **[Tsx](https://github.com/egoist/tsx):** Compilador TypeScript que suporta a construção de projetos.
-- **[Node.js](https://nodejs.org/):** Ambiente de execução JavaScript que permite executar código JavaScript do lado do servidor.
-- **[@types/node](https://www.npmjs.com/package/@types/node):** Pacote de definições de tipos para Node.js para auxiliar no desenvolvimento com TypeScript.
 
 ## 📝 Como Utilizar
 
