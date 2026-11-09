@@ -1,0 +1,26 @@
+[
+  {
+    "podcastName": "Fala Glauber",
+    "episode": "Relatos de combate, missões especiais e rotinas de operacionais militares",
+    "videoId": "pQSuQmUfS30",
+    "categories": ["relatos", "operações", "carreira militar"]
+  },
+  {
+    "podcastName": "Fala Glauber",
+    "episode": "Bastidores de missões reais e treinamento de elite (BOPE)",
+    "videoId": "4KDGTdiOV4I",
+    "categories": ["entrevista", "missões", "treinamento"]
+  },
+  {
+    "podcastName": "Podcast Militar",
+    "episode": "Análise de estratégias de defesa e geopolítica global",
+    "videoId": "dQw4w9WgXcQ",
+    "categories": ["estratégia", "geopolítica", "defesa"]
+  },
+  {
+    "podcastName": "Podcast Militar",
+    "episode": "História militar, grandes batalhas e táticas de campo",
+    "videoId": "dQw4w9WgXcQ",
+    "categories": ["história militar", "táticas", "batalhas"]
+  }
+]
